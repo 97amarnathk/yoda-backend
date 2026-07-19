@@ -4,7 +4,7 @@ import { Card } from './ui';
 import { UserData } from '@/lib/types';
 
 const sectionTitle = { fontFamily: 'var(--font-display)', fontWeight: 800 as const, fontSize: 22, color: 'var(--text-primary)' };
-const heatColors = ['var(--ink-800)', 'var(--accent-right-tint)', 'rgba(214,255,63,.35)', 'rgba(214,255,63,.65)', 'var(--accent-right)'];
+const heatColors = ['var(--ink-700)', 'var(--accent-right-tint)', 'rgba(214,255,63,.35)', 'rgba(214,255,63,.65)', 'var(--accent-right)'];
 
 export function Heatmap({ user }: { user: UserData }) {
   const [heatHover, setHeatHover] = useState<number | null>(null);
@@ -24,7 +24,7 @@ export function Heatmap({ user }: { user: UserData }) {
         <div style={{ display: 'grid', gridTemplateRows: 'repeat(7,12px)', gridAutoFlow: 'column', gridAutoColumns: 12, gap: 4, overflowX: 'auto', paddingBottom: 4 }}>
           {user.heatmap.map((cell, i) => (
             <div key={cell.date} onMouseEnter={() => setHeatHover(i)} onMouseLeave={() => setHeatHover(null)}
-              style={{ width: 12, height: 12, borderRadius: 3, background: heatColors[cell.count], cursor: 'pointer', transition: 'transform var(--dur-fast) var(--ease-out)', transform: heatHover === i ? 'scale(1.35)' : 'scale(1)' }} />
+              style={{ width: 12, height: 12, borderRadius: 3, background: heatColors[cell.count], border: cell.count === 0 ? '1px solid var(--ink-600)' : '1px solid transparent', cursor: 'pointer', transition: 'transform var(--dur-fast) var(--ease-out)', transform: heatHover === i ? 'scale(1.35)' : 'scale(1)' }} />
           ))}
         </div>
       </Card>
